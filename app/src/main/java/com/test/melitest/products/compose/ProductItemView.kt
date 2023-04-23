@@ -17,11 +17,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.test.melitest.theme.MeliTypography
 import com.test.melitest.R
+import com.test.melitest.products.models.ProductVisualize
 import com.test.melitest.theme.Green
 
 @Preview(showBackground = true)
 @Composable
-fun ProductItemView() {
+fun ProductItemView(productVisualize: ProductVisualize) {
 
     Card(modifier = Modifier
         .fillMaxWidth()
@@ -31,14 +32,14 @@ fun ProductItemView() {
         Row(
             modifier = Modifier.wrapContentSize()
         ) {
-            LeftSide()
-            RightSide()
+            LeftSide(productVisualize)
+            RightSide(productVisualize)
         }
     }
 }
 
 @Composable
-private fun LeftSide() {
+private fun LeftSide(productVisualize: ProductVisualize) {
     Image(
         painter = painterResource(id = R.mipmap.testimage),
         contentDescription = ""
@@ -50,20 +51,20 @@ private fun LeftSide() {
 }
 
 @Composable
-private fun RightSide() {
+private fun RightSide(productVisualize: ProductVisualize) {
     Column(
         modifier = Modifier.padding(10.dp)
     ) {
         Text(
-            text = "Moto G6 plus 64 GB indigo oscuro 4GB RAM",
+            text = productVisualize.title,
             style = MeliTypography.h6.copy(fontWeight = FontWeight.Normal)
         )
         Text(
-            text = "$ 569.000",
+            text = productVisualize.showPrice(),
             style = MeliTypography.subtitle1
         )
         Text(
-            text = "En 36 x $ 15.830",
+            text = productVisualize.showInstallmentInformation(),
             style = MeliTypography.caption.copy(fontSize = 8.sp)
         )
         Spacer(modifier = Modifier.padding(vertical = 6.dp))

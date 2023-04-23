@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
+import com.test.data.products.repositories.ProductRepository
+import com.test.domain.usecases.FetchProductsUseCase
 import com.test.melitest.products.compose.ProductView
 import com.test.melitest.theme.MeliTheme
 
@@ -21,7 +23,9 @@ class ProductsFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MeliTheme {
-                    ProductView()
+                    ProductView(
+                        viewModel = ProductsViewModel(FetchProductsUseCase(ProductRepository()))
+                    )
                 }
             }
         }
